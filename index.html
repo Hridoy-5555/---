@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভূমিসেবা অ্যাপ - ল্যান্ড সার্ভিস ড্যাশবোর্ড</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font (Hind Siliguri & Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col justify-between text-gray-800">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-[#0f4c3a] text-white shadow-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#" onclick="switchTab('home')" class="flex items-center gap-2 text-lg md:text-xl font-bold">
+                <i class="fas fa-landmark text-emerald-300"></i> ভূমিসেবা অ্যাপ
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <button onclick="switchTab('home')" class="nav-btn text-emerald-300 hover:text-white transition flex items-center gap-1.5" data-tab="home">
+                    <i class="fas fa-home text-xs"></i> Home
+                </button>
+                <button onclick="switchTab('shop')" class="nav-btn text-emerald-100 hover:text-white transition flex items-center gap-1.5" data-tab="shop">
+                    <i class="fas fa-store text-xs"></i> দোকান
+                </button>
+                <button onclick="switchTab('my-items')" class="nav-btn text-emerald-100 hover:text-white transition flex items-center gap-1.5" data-tab="my-items">
+                    <i class="fas fa-box text-xs"></i> আমার আইটেম
+                </button>
+                <button onclick="switchTab('gigs')" class="nav-btn text-emerald-100 hover:text-white transition flex items-center gap-1.5" data-tab="gigs">
+                    <i class="fas fa-tags text-xs"></i> Gigs
+                </button>
+                <button onclick="switchTab('jobs')" class="nav-btn text-emerald-100 hover:text-white transition flex items-center gap-1.5" data-tab="jobs">
+                    <i class="fas fa-briefcase text-xs"></i> Jobs
+                </button>
+            </nav>
+
+            <!-- Right Profile Link & Mobile Menu Button -->
+            <div class="flex items-center gap-3">
+                <button onclick="switchTab('profile')" class="hidden sm:flex items-center gap-1.5 bg-emerald-700/80 hover:bg-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-lg transition border border-emerald-600">
+                    <i class="fas fa-user"></i> Profile
+                </button>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-white text-xl p-1 focus:outline-none">
+                    <i class="fas fa-bars" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-[#0a3528] px-4 py-3 space-y-2 border-t border-emerald-800">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded hover:bg-emerald-800 text-sm">হোম (Home)</button>
+            <button onclick="switchTab('shop'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded hover:bg-emerald-800 text-sm">দোকান (Shop)</button>
+            <button onclick="switchTab('my-items'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded hover:bg-emerald-800 text-sm">আমার আইটেম (My Items)</button>
+            <button onclick="switchTab('gigs'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded hover:bg-emerald-800 text-sm">গিগস (Gigs)</button>
+            <button onclick="switchTab('jobs'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded hover:bg-emerald-800 text-sm">জবস (Jobs)</button>
+            <button onclick="switchTab('profile'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded hover:bg-emerald-800 text-sm">প্রোফাইল (Profile)</button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-6xl mx-auto px-4 md:px-8 py-6 w-full space-y-6 flex-grow">
+
+        <!-- TAB 1: HOME VIEW -->
+        <div id="tab-home" class="tab-content space-y-6">
+            <!-- Top Header Welcome Banner -->
+            <div class="bg-[#0f4c3a] text-white py-6 px-6 rounded-2xl shadow-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold">স্বাগত্ম, Atozcworld!</h1>
+                    <p class="text-emerald-200 text-sm md:text-base mt-1">আপনার ব্যবহারকারী অ্যাকাউন্টে স্বাগতম</p>
+                </div>
+                <div class="flex items-center gap-3 flex-wrap">
+                    <a href="https://wa.me/+8801949009559" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition shadow flex items-center gap-2">
+                        <i class="fab fa-facebook"></i> ফেসবুক গ্রুপে যোগ দিন
+                    </a>
+                    <button onclick="switchTab('profile')" class="bg-white text-[#0f4c3a] hover:bg-gray-100 text-sm font-semibold px-4 py-2 rounded-lg transition shadow flex items-center gap-2">
+                        <i class="fas fa-user"></i> প্রোফাইল দেখুন
+                    </button>
+                </div>
+            </div>
+
+            <!-- Top Action Cards Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Card 1: Support Needed -->
+                <div class="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl p-6 shadow-lg relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute right-4 top-4 text-emerald-500/30 text-6xl pointer-events-none">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div>
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-3">
+                            <i class="fas fa-shield-alt text-white"></i>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-bold">জমি বিষয়ক সহায়তা প্রয়োজন?</h3>
+                        <p class="text-emerald-100 text-sm mt-1">দক্ষ ও অভিজ্ঞ কর্মীর মাধ্যমে প্রয়োজনীয় সেবা সহায়তা প্রদান করা হবে।</p>
+                    </div>
+                    <div class="mt-6">
+                        <button onclick="openModal('সহায়তা সেবা', 'আমাদের দক্ষ প্রতিনিধি দ্রুত আপনার সাথে যোগাযোগ করবেন। হোয়াটসঅ্যাপে যোগাযোগ করতে ০১৯৪৯০০৯৫৫৮ নম্বরে মেসেজ করুন।')" class="inline-flex items-center gap-2 bg-white text-emerald-800 font-semibold text-sm px-4 py-2 rounded-xl hover:bg-emerald-50 transition shadow">
+                            যোগাযোগ করুন <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Worker Application -->
+                <div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-2xl p-6 shadow-lg relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute right-4 top-4 text-slate-700/50 text-6xl pointer-events-none">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div>
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-3">
+                            <i class="fas fa-check text-emerald-400"></i>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-bold">আপনি কি জমি সম্পর্কিত কাজ জানেন?</h3>
+                        <p class="text-slate-300 text-sm mt-1">কর্মী হিসেবে আবেদন করুন এবং আপনার দক্ষতা অনুযায়ী কাজের সুযোগ পান।</p>
+                    </div>
+                    <div class="mt-6">
+                        <button onclick="openModal('কর্মী আবেদন', 'কর্মী হিসেবে কাজ করার জন্য আপনার বায়োডাটা ও অভিজ্ঞতা আমাদের হোয়াটসঅ্যাপ নম্বরে পাঠান।')" class="inline-flex items-center gap-2 bg-emerald-600 text-white font-semibold text-sm px-4 py-2 rounded-xl hover:bg-emerald-500 transition shadow">
+                            কর্মী হতে যোগাযোগ করুন <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Summary Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <!-- Balance Card -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col justify-between">
+                    <div>
+                        <p class="text-gray-500 text-xs font-medium">আপনার ব্যালেন্স</p>
+                        <h4 id="userBalanceDisplay" class="text-2xl font-bold text-gray-900 mt-1">৳ 0.00</h4>
+                    </div>
+                    <div class="mt-4">
+                        <button onclick="openAddMoneyModal()" class="text-emerald-700 hover:text-emerald-800 text-xs font-semibold inline-flex items-center gap-1">
+                            টাকা যোগ করুন <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Score Card -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col justify-between">
+                    <div>
+                        <p class="text-gray-500 text-xs font-medium">আপনার স্কোর</p>
+                        <h4 class="text-2xl font-bold text-gray-900 mt-1">0</h4>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-gray-400 text-xs">ব্যবহারকারী অ্যাকাউন্ট স্কোর প্রদান হয়েছে</span>
+                    </div>
+                </div>
+
+                <!-- Status Card -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col justify-between">
+                    <div>
+                        <p class="text-gray-500 text-xs font-medium">অ্যাকাউন্ট স্ট্যাটাস</p>
+                        <div class="mt-2 inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-md">
+                            সক্রিয়
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-gray-400 text-xs">30 Jun, 2026 17:14</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile & Quick Actions Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Profile Info Card -->
+                <div id="profile" class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">আপনার প্রোফাইল</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">নাম:</span>
+                            <span class="font-semibold text-gray-800">Atozcworld</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">ফোন:</span>
+                            <span class="font-semibold text-gray-800">01949009559</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">সদস্য হয়েছেন:</span>
+                            <span class="font-semibold text-gray-800">30 Jun, 2026 17:14</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500">ইউজার আইডি:</span>
+                            <span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded text-xs">21794</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Card -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">দ্রুত ক্রিয়া</h3>
+                        <div class="space-y-3">
+                            <button onclick="openAddMoneyModal()" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-medium px-4 py-3 rounded-xl transition flex items-center justify-between text-sm">
+                                <span class="flex items-center gap-3">
+                                    <i class="fas fa-wallet text-emerald-600"></i> টাকা যোগ করুন
+                                </span>
+                                <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                            </button>
+                            <a href="https://wa.me/+8801949009559" target="_blank" class="w-full bg-blue-50 hover:bg-blue-100 text-blue-800 font-medium px-4 py-3 rounded-xl transition flex items-center justify-between text-sm">
+                                <span class="flex items-center gap-3">
+                                    <i class="fab fa-facebook text-blue-600"></i> আমাদের ফেসবুক গ্রুপে যোগ দিন
+                                </span>
+                                <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Features Section -->
+            <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">প্রধান বৈশিষ্ট্য</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Feature 1: Khatian Search -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col justify-between hover:shadow-md transition">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-base font-bold text-gray-900">সার্চ খতিয়ান</h4>
+                                <p class="text-gray-500 text-xs mt-1">আলাদা খতিয়ান ক্রয় করুন (মূল্য: ৳৫০)</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <button onclick="openKhatianModal()" class="text-emerald-700 hover:text-emerald-800 text-xs font-semibold inline-flex items-center gap-1">
+                                দেখুন <i class="fas fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <button onclick="addToCart('সার্চ খতিয়ান', 50)" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-lg transition">
+                                কার্টে যোগ করুন
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2: Mouza PDF -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col justify-between hover:shadow-md transition">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-base font-bold text-gray-900">মৌজা পিডিএফ</h4>
+                                <p class="text-gray-500 text-xs mt-1">সম্পূর্ণ মৌজা ডেটা ডাউনলোড করুন (মূল্য: ৳১০০)</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <button onclick="openMouzaModal()" class="text-emerald-700 hover:text-emerald-800 text-xs font-semibold inline-flex items-center gap-1">
+                                দেখুন <i class="fas fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <button onclick="addToCart('মৌজা পিডিএফ', 100)" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-lg transition">
+                                কার্টে যোগ করুন
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3: Purchased Items -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col justify-between hover:shadow-md transition">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-base font-bold text-gray-900">কোন আইটেম কেনা আছে</h4>
+                                <p class="text-gray-500 text-xs mt-1">ক্রয় করা আইটেম দেখুন</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                                <i class="fas fa-box"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button onclick="switchTab('my-items')" class="text-emerald-700 hover:text-emerald-800 text-xs font-semibold inline-flex items-center gap-1">
+                                দেখুন <i class="fas fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4: Shopping Cart -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col justify-between hover:shadow-md transition">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-base font-bold text-gray-900">শপিং কার্ট</h4>
+                                <p class="text-gray-500 text-xs mt-1">আপনার কার্ট পর্যালোচনা করুন</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <button onclick="switchTab('shop')" class="text-emerald-700 hover:text-emerald-800 text-xs font-semibold inline-flex items-center gap-1">
+                                দেখুন <i class="fas fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <span id="cartItemBadge" class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-0.5 rounded">0 আইটেম</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: SHOP / STORE VIEW -->
+        <div id="tab-shop" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                <h2 class="text-xl font-bold text-gray-900 mb-2">ভূমি সেবা দোকান (Shop)</h2>
+                <p class="text-gray-600 text-sm mb-6">আপনার প্রয়োজনীয় খতিয়ান, পর্চা এবং মৌজা ম্যাপ অনলাইন থেকে অর্ডার করুন।</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border border-gray-200 rounded-xl p-5 flex flex-col justify-between bg-gray-50">
+                        <div>
+                            <span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded font-bold">খতিয়ান সেবা</span>
+                            <h3 class="text-lg font-bold mt-2">অনলাইন খতিয়ান অনুসন্ধান ও কপি</h3>
+                            <p class="text-sm text-gray-600 mt-1">জেলা, উপজেলা ও মৌজা নির্বাচন করে নির্দিষ্ট খতিয়ান সংগ্রহ করুন।</p>
+                            <div class="mt-3 text-emerald-700 font-bold">মূল্য: ৳ ৫০</div>
+                        </div>
+                        <button onclick="addToCart('অনলাইন খতিয়ান অনুসন্ধান ও কপি', 50)" class="mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 rounded-xl text-sm transition">
+                            কার্টে যোগ করুন
+                        </button>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-xl p-5 flex flex-col justify-between bg-gray-50">
+                        <div>
+                            <span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded font-bold">মৌজা ম্যাপ</span>
+                            <h3 class="text-lg font-bold mt-2">সম্পূর্ণ মৌজা পিডিএফ ডাউনলোড</h3>
+                            <p class="text-sm text-gray-600 mt-1">সার্ভে ম্যাপ ও শিট সম্পূর্ণ এইচডি ফরম্যাটে ডাউনলোড করুন।</p>
+                            <div class="mt-3 text-emerald-700 font-bold">মূল্য: ৳ ১০০</div>
+                        </div>
+                        <button onclick="addToCart('সম্পূর্ণ মৌজা পিডিএফ ডাউনলোড', 100)" class="mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 rounded-xl text-sm transition">
+                            কার্টে যোগ করুন
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Active Cart Summary Box -->
+                <div class="mt-8 border-t border-gray-200 pt-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">আপনার শপিং কার্ট</h3>
+                    <div id="cartItemsList" class="space-y-3">
+                        <p class="text-gray-500 text-sm">আপনার কার্ট বর্তমানে খালি রয়েছে।</p>
+                    </div>
+                    <div id="cartCheckoutSection" class="hidden mt-6 flex flex-col sm:flex-row justify-between items-center bg-emerald-50 p-4 rounded-xl">
+                        <div class="text-sm font-bold text-gray-800 mb-3 sm:mb-0">
+                            মোট মূল্য: <span id="cartTotalPrice" class="text-emerald-700 text-lg">৳ 0</span>
+                        </div>
+                        <button onclick="checkoutCart()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition shadow">
+                            চেকআউট করুন (ক্রয় করুন)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: MY ITEMS VIEW -->
+        <div id="tab-my-items" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                <h2 class="text-xl font-bold text-gray-900 mb-2">ক্রয়কৃত আইটেম (My Items)</h2>
+                <p class="text-gray-600 text-sm mb-6">আপনার পূর্বে ক্রয় করা সকল খতিয়ান ও মৌজা ফাইলের তালিকা নিচে দেওয়া হলো।</p>
+                
+                <div id="purchasedItemsContainer" class="space-y-4">
+                    <div class="p-4 border border-gray-200 rounded-xl bg-gray-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <div>
+                            <span class="text-xs text-gray-500">ক্রয়ের তারিখ: ৩০ জুন, ২০২৬</span>
+                            <h4 class="font-bold text-gray-800">নমুনা খতিয়ান - ঢাকা (সিএস)</h4>
+                            <p class="text-xs text-emerald-700 font-medium">ডাউনলোড স্ট্যাটাস: সফলভাবে ডাউনলোড সম্পন্ন</p>
+                        </div>
+                        <button onclick="openModal('ফাইল ডাউনলোড', 'আপনার ফাইলটি ইতিমধ্যেই প্রস্তুত রয়েছে।')" class="bg-emerald-100 hover:bg-emerald-200 text-emerald-800 text-xs font-semibold px-4 py-2 rounded-lg transition">
+                            পিডিএফ ডাউনলোড
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: GIGS VIEW -->
+        <div id="tab-gigs" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                <h2 class="text-xl font-bold text-gray-900 mb-2">বিশেষ ভূমি গিগস (Gigs)</h2>
+                <p class="text-gray-600 text-sm mb-6">বিশেষজ্ঞ সার্ভেয়ার ও আইনজীবীদের গিগ সেবা বুক করুন।</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-5 border border-gray-200 rounded-xl bg-gray-50 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-base">জমি মাপঝোক ও আমিন সেবা</h3>
+                            <p class="text-xs text-gray-600 mt-1">অভিজ্ঞ আমিন দ্বারা আপনার জমি সঠিক মাপে বুঝে নিন।</p>
+                        </div>
+                        <button onclick="openModal('আমিন সেবা', 'এই সার্ভিসের জন্য আমাদের সাথে সরাসরি যোগাযোগ করুন।')" class="mt-4 bg-emerald-600 text-white text-xs py-2 rounded-lg">বুক করুন</button>
+                    </div>
+                    <div class="p-5 border border-gray-200 rounded-xl bg-gray-50 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-base">নামজারি ও মিসকেস সমাধান</h3>
+                            <p class="text-xs text-gray-600 mt-1">নামজারি জটিলতা নিরসনে দ্রুত আইনি সহায়তা পান।</p>
+                        </div>
+                        <button onclick="openModal('আইনি সেবা', 'এই সার্ভিসের জন্য আমাদের সাথে সরাসরি যোগাযোগ করুন।')" class="mt-4 bg-emerald-600 text-white text-xs py-2 rounded-lg">বুক করুন</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: JOBS VIEW -->
+        <div id="tab-jobs" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                <h2 class="text-xl font-bold text-gray-900 mb-2">কাজের সুযোগ (Jobs)</h2>
+                <p class="text-gray-600 text-sm mb-6">ভূমি সংক্রান্ত কাজে দক্ষ কর্মীদের জন্য উপলব্ধ কাজসমূহ।</p>
+                <div class="space-y-4">
+                    <div class="p-4 border border-gray-200 rounded-xl bg-gray-50 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-sm">খতিয়ান সংগ্রহ সহকারী - ঢাকা জেলা</h4>
+                            <p class="text-xs text-gray-500 mt-1">আবেদন শেষ তারিখ: ৩০ জুলাই, ২০২৬</p>
+                        </div>
+                        <button onclick="openModal('জবস আবেদন', 'এই পদের জন্য আপনার সিভি পাঠান।')" class="bg-emerald-600 text-white text-xs px-4 py-2 rounded-lg">আবেদন করুন</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: PROFILE VIEW -->
+        <div id="tab-profile" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 max-w-2xl mx-auto">
+                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-bold">
+                        A
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900">Atozcworld</h2>
+                        <p class="text-xs text-emerald-700 font-semibold mt-0.5">সক্রিয় ব্যবহারকারী (ID: 21794)</p>
+                    </div>
+                </div>
+                <div class="space-y-4 text-sm">
+                    <div class="flex justify-between py-2 border-b border-gray-50">
+                        <span class="text-gray-500">ফোন নম্বর:</span>
+                        <span class="font-semibold">01949009559</span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-gray-50">
+                        <span class="text-gray-500">অ্যাকাউন্ট ব্যালেন্স:</span>
+                        <span id="profileBalanceText" class="font-bold text-emerald-700">৳ 0.00</span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-gray-50">
+                        <span class="text-gray-500">সদস্য পদ শুরুর তারিখ:</span>
+                        <span class="font-semibold">30 Jun, 2026 17:14</span>
+                    </div>
+                </div>
+                <div class="mt-6 flex gap-3">
+                    <button onclick="openAddMoneyModal()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium py-2.5 rounded-xl transition">
+                        ব্যালেন্স রিচার্জ করুন
+                    </button>
+                    <button onclick="switchTab('home')" class="px-5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium py-2.5 rounded-xl transition">
+                        হোমে ফিরে যান
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0f4c3a] text-white pt-10 pb-6 px-4 md:px-8 mt-10">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8 text-sm">
+            <!-- Column 1: App Info -->
+            <div>
+                <h4 class="font-bold text-base mb-3 flex items-center gap-2">
+                    <i class="fas fa-landmark text-emerald-300"></i> ভূমিসেবা অ্যাপ
+                </h4>
+                <p class="text-emerald-100 text-xs leading-relaxed">
+                    বাংলাদেশের বিশ্বস্ত ভূমি রেকর্ড এবং কমিউনিটি নেটওয়ার্কিং প্ল্যাটফর্ম।
+                </p>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div>
+                <h4 class="font-bold text-base mb-3">দ্রুত লিঙ্ক</h4>
+                <ul class="space-y-2 text-emerald-100 text-xs">
+                    <li><a href="#" onclick="switchTab('home')" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-home text-[10px]"></i> বাড়ি</a></li>
+                    <li><a href="#" onclick="openModal('বার্তা', 'আপনার কোনো নতুন বার্তা নেই।')" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-envelope text-[10px]"></i> বার্তা</a></li>
+                    <li><a href="#" onclick="openModal('আমাদের সম্পর্কে', 'ভূমিসেবা অ্যাপ ভূমি রেকর্ড ডিজিটালাইজেশনের একটি বিশ্বস্ত মাধ্যম।')" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-info-circle text-[10px]"></i> আমাদের সম্পর্কে</a></li>
+                    <li><a href="#" onclick="openModal('গোপনীয়তা নীতি', 'আপনার সকল তথ্য সম্পূর্ণ সুরক্ষিত ও গোপনীয় রাখা হয়।')" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-lock text-[10px]"></i> গোপনীয়তা নীতি</a></li>
+                    <li><a href="#" onclick="switchTab('jobs')" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-briefcase text-[10px]"></i> কাজ</a></li>
+                    <li><a href="#" onclick="switchTab('gigs')" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-tag text-[10px]"></i> গিগ</a></li>
+                    <li><a href="#" onclick="openAddMoneyModal()" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-wallet text-[10px]"></i> টাকা যোগ করুন</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Support -->
+            <div>
+                <h4 class="font-bold text-base mb-3">সহায়তা</h4>
+                <ul class="space-y-2 text-emerald-100 text-xs">
+                    <li><a href="https://wa.me/+8801949009559" target="_blank" class="hover:text-white transition flex items-center gap-2"><i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ</a></li>
+                    <li><a href="#" onclick="openModal('সমর্থন কেন্দ্র', 'আমাদের হটলাইন ০১৯৪৯০০৯৫৫৯ নম্বরে সকাল ৯টা থেকে রাত ১০টা পর্যন্ত যোগাযোগ করুন।')" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-headset"></i> সমর্থন</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Connect -->
+            <div>
+                <h4 class="font-bold text-base mb-3">যোগাযোগ করুন</h4>
+                <ul class="space-y-2 text-emerald-100 text-xs">
+                    <li><a href="https://wa.me/+8801949009559" target="_blank" class="hover:text-white transition flex items-center gap-2"><i class="fab fa-facebook"></i> ফেসবুক</a></li>
+                    <li><a href="#" onclick="openModal('ইউটিউব চ্যানেল', 'আমাদের অফিশিয়াল ইউটিউব টিউটোরিয়াল চ্যানেল শীঘ্রই আসছে।')" class="hover:text-white transition flex items-center gap-2"><i class="fab fa-youtube"></i> ইউটিউব</a></li>
+                    <li><a href="#" onclick="openModal('টেলিগ্রাম গ্রুপ', 'আমাদের টেলিগ্রাম সাপোর্ট গ্রুপে যুক্ত হোন।')" class="hover:text-white transition flex items-center gap-2"><i class="fab fa-telegram"></i> টেলিগ্রাম</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Whatsapp banner bar -->
+        <div class="max-w-6xl mx-auto mb-6 bg-[#0a3528] py-3 px-4 rounded-xl text-center text-xs md:text-sm font-medium border border-emerald-800">
+            কোন সমস্যা হলে আমাদের <a href="https://wa.me/+8801949009559" target="_blank" class="text-emerald-300 underline font-bold hover:text-white">হোয়াটসঅ্যাপ বার্তা পাঠান</a>
+        </div>
+
+        <div class="max-w-6xl mx-auto pt-4 border-t border-emerald-800 text-center text-emerald-200 text-xs">
+            &copy; 2026 ভূমিসেবা অ্যাপ. সর্বস্বত্ব সংরক্ষিত।
+        </div>
+    </footer>
+
+    <!-- Universal Generic Modal -->
+    <div id="infoModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl transform transition-all">
+            <h3 id="modalTitle" class="text-lg font-bold text-gray-900 mb-2"></h3>
+            <p id="modalDesc" class="text-gray-600 text-sm mb-6"></p>
+            <div class="flex justify-end">
+                <button onclick="closeModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm px-5 py-2 rounded-xl transition">
+                    ঠিক আছে
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Money Modal -->
+    <div id="addMoneyModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">টাকা যোগ করুন (Add Balance)</h3>
+            <p class="text-gray-600 text-sm mb-4">বিকাশ/নগদ বা কার্ডের মাধ্যমে আপনার অ্যাকাউন্টে ব্যালেন্স যুক্ত করুন।</p>
+            <div class="space-y-3 mb-6">
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">টাকার পরিমাণ (৳)</label>
+                    <input type="number" id="depositAmountInput" value="500" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button onclick="closeAddMoneyModal()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-xl transition">বাতিল</button>
+                <button onclick="confirmAddMoney()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-xl transition">রিসেট/যোগ করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        
+        let userBalance = 0.00;
+        let cart = [];
+
+        
+        function switchTab(tabId) {
+            
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.add('hidden'));
+
+           
+            const target = document.getElementById('tab-' + tabId);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabId) {
+                    btn.classList.add('text-white', 'font-bold');
+                    btn.classList.remove('text-emerald-100');
+                } else {
+                    btn.classList.remove('text-white', 'font-bold');
+                    btn.classList.add('text-emerald-100');
+                }
+            });
+        }
+
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        
+        function openModal(title, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            const modal = document.getElementById('infoModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('infoModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function openKhatianModal() {
+            openModal('সার্চ খতিয়ান সেবা', 'খতিয়ান অনুসন্ধানের জন্য অনুগ্রহ করে দোকান (Shop) ট্যাব থেকে খতিয়ান ক্রয় করুন।');
+        }
+
+        function openMouzaModal() {
+            openModal('মৌজা পিডিএফ ডাউনলোড', 'মৌজা পিডিএফ ফাইল ডাউনলোডের জন্য দোকান (Shop) ট্যাব থেকে সেবাটি নির্বাচন করুন।');
+        }
+
+        
+        function openAddMoneyModal() {
+            const modal = document.getElementById('addMoneyModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeAddMoneyModal() {
+            const modal = document.getElementById('addMoneyModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function confirmAddMoney() {
+            const inputVal = parseFloat(document.getElementById('depositAmountInput').value);
+            if (isNaN(inputVal) || inputVal <= 0) {
+                alert('সঠিক টাকার পরিমাণ লিখুন।');
+                return;
+            }
+            userBalance += inputVal;
+            updateBalanceDisplays();
+            closeAddMoneyModal();
+            openModal('সফল হয়েছে', `আপনার অ্যাকাউন্টে সফলভাবে ৳ ${inputVal.toFixed(2)} যোগ করা হয়েছে।`);
+        }
+
+        function updateBalanceDisplays() {
+            document.getElementById('userBalanceDisplay').innerText = `৳ ${userBalance.toFixed(2)}`;
+            document.getElementById('profileBalanceText').innerText = `৳ ${userBalance.toFixed(2)}`;
+        }
+
+        // Cart Management
+        function addToCart(itemName, price) {
+            cart.push({ name: itemName, price: price });
+            updateCartUI();
+            openModal('কার্টে যোগ করা হয়েছে', `"${itemName}" সফলভাবে আপনার কার্টে যোগ করা হয়েছে।`);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cartItemsList');
+            const badge = document.getElementById('cartItemBadge');
+            const checkoutSec = document.getElementById('cartCheckoutSection');
+            const totalPriceEl = document.getElementById('cartTotalPrice');
+
+            badge.innerText = `${cart.length} আইটেম`;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-sm">আপনার কার্ট বর্তমানে খালি রয়েছে।</p>';
+                checkoutSec.classList.add('hidden');
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl border border-gray-200">
+                        <div>
+                            <h4 class="font-bold text-sm text-gray-800">${item.name}</h4>
+                            <span class="text-xs text-emerald-700 font-semibold">মূল্য: ৳ ${item.price}</span>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 text-xs font-medium px-2 py-1">
+                            <i class="fas fa-trash"></i> বাদ দিন
+                        </button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            totalPriceEl.innerText = `৳ ${total}`;
+            checkoutSec.classList.remove('hidden');
+        }
+
+        function checkoutCart() {
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+            if (userBalance < total) {
+                openModal('অপর্যাপ্ত ব্যালেন্স', 'আপনার অ্যাকাউন্টে পর্যাপ্ত ব্যালেন্স নেই। অনুগ্রহ করে প্রথমে "টাকা যোগ করুন" অপশন থেকে ব্যালেন্স রিচার্জ করুন।');
+                return;
+            }
+            userBalance -= total;
+            updateBalanceDisplays();
+            
+            // Move items to purchased items list simulation
+            cart = [];
+            updateCartUI();
+            openModal('ক্রয় সফল হয়েছে', 'আপনার অর্ডারটি সফলভাবে সম্পন্ন হয়েছে! আপনার ক্রয়কৃত আইটেম সেকশনে ফাইলগুলো যুক্ত হয়েছে।');
+            switchTab('my-items');
+        }
+    </script>
+</body>
+</html>
